@@ -67,6 +67,16 @@ for acr in "$ACR_NAME" "$BASE_ACR"; do
   fi
 done
 
+echo "⚙️  Building base image 'baseimages/node:15-alpine' in registry '$BASE_ACR'..."
+az acr build \
+  --registry $BASE_ACR \
+  --image baseimages/node:15-alpine \
+  --file Dockerfile-base \
+  .
+echo "✅ Base image built and pushed to '$BASE_ACR.azurecr.io/baseimages/node:15-alpine'."
+
+
+
 echo "⚙️  Creating ACR task '$TASK_NAME' in registry '$ACR_NAME'..."
 az acr task create \
     --registry $ACR_NAME \
